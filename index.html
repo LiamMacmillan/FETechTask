@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FE Tech Task</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/70f512ec3a.js" crossorigin="anonymous"></script>
+    <script src="js/main-dist.js"></script> <!-- TODO: Change to main-dist.js -->
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://use.typekit.net/lke7yuf.css">
+</head>
+
+<body>
+
+<!-- MAIN WRAPPER -->
+<div id="main-wrapper">   
+
+    <!-- SHOPPING CART -->
+    <section id="shopping-cart">
+
+        <div class="header"><h2>Shopping Cart</h2></div>
+
+        <div id="product-table">
+
+            <!-- Table Head -->
+            <div id="table-head" class="row">
+                <div class="cell"><h3>Product Details</h3></div>
+                <div class="cell"><h3>Quantity</h3></div>
+                <div class="cell"><h3>Price</h3></div>
+                <div class="cell"><h3>Total</h3></div>
+            </div>
+
+            <!-- Table Body (contains products) -->
+            <div id="table-body"></div>
+
+        </div>
+    </section>
+
+    <!-- ORDER SUMMARY -->
+    <section id="order-summary">
+
+        <div id="top">
+
+            <div class="header"><h2>Order Summary</h2></div>
+
+            <div id="item-summary">
+                <div class="no-of-items"><span>0</span> Items</div>
+                <div class="total-cost"><span>0</span>&nbsp;€</div>
+            </div>
+
+            <div id="discount-summary">
+                <h3>Discounts</h3>
+                <div id="discount-2for1" class="discount hide">
+                    <div class="discount-name">2x1 Goku POP offer</div>
+                    <div class="savings">-<span></span>&nbsp;€</div>
+                </div>
+                <div id="discount-naru" class="discount hide">
+                    <div class="discount-name">x3 Naruto POP offer</div>
+                    <div class="savings">-<span></span>&nbsp;€</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="bottom">
+            <div id="checkout-container">    
+                <div id="total-final-cost-container">
+                    <p>Total Cost</p>
+                    <div id="total-final-cost"><span>0</span>&nbsp;€</div>
+                </div>
+                <input id="checkout-button" type="button" value="Checkout">
+            </div>
+        </div>
+
+    </section>
+
+</div> 
+
+</body>
+
+</html>
