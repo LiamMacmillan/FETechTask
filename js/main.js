@@ -8,33 +8,33 @@ let itemId = 0;
 
 // Define products for sale 
 const items = [
-{
-    id: itemId++,
-    name: "Goku POP",
-    imageURL: "images/goku.jpg",
-    code: "GOKU",
-    price: 5,
-    finalPrice: 2.5, // always 50% off (2-for-1)
-    count: 0
-}, 
-{
-    id: itemId++,
-    name: "Naruto POP",
-    imageURL: "images/naruto.jpg",
-    code: "NARU",
-    price: 20,
-    finalPrice: 20,
-    count: 0
-}, 
-{
-    id: itemId++,
-    name: "Luffy POP",
-    imageURL: "images/luffy.jpg",
-    code: "LUF",
-    price: 7.5,
-    finalPrice: 7.5,
-    count: 0
-}
+    {
+        id: itemId++,
+        name: "Goku POP",
+        imageURL: "images/goku.jpg",
+        code: "GOKU",
+        price: 5,
+        finalPrice: 2.5, // always 50% off (2-for-1)
+        count: 0
+    }, 
+    {
+        id: itemId++,
+        name: "Naruto POP",
+        imageURL: "images/naruto.jpg",
+        code: "NARU",
+        price: 20,
+        finalPrice: 20,
+        count: 0
+    }, 
+    {
+        id: itemId++,
+        name: "Luffy POP",
+        imageURL: "images/luffy.jpg",
+        code: "LUF",
+        price: 7.5,
+        finalPrice: 7.5,
+        count: 0
+    }
 ]
 
 // -------------------
@@ -42,7 +42,7 @@ const items = [
 // -------------------
 
 // Check if bulk discount should be applied
-let checkBulkDiscount = (itemId, itemCode, itemCount) => {
+const checkBulkDiscount = (itemId, itemCode, itemCount) => {
 
     if(itemCode === "NARU" && itemCount >= 3) { // discount applies, set price to 19€/item
         items[itemId].finalPrice = 19;
@@ -53,7 +53,7 @@ let checkBulkDiscount = (itemId, itemCode, itemCount) => {
 }
 
 // Check if item code is "GOKU", if true then the 2-for-1 promotion should be applied (set to increments of 2)
-let checkTwoForOnePromo = (itemId, itemCode, itemCount, addOrSubtract) => {
+const checkTwoForOnePromo = (itemId, itemCode, itemCount, addOrSubtract) => {
 
     if(itemCode === "GOKU" && addOrSubtract === "+") { // add free Goku 
         items[itemId].count++;
@@ -68,24 +68,24 @@ let checkTwoForOnePromo = (itemId, itemCode, itemCount, addOrSubtract) => {
 // -----------------
 
 // Calculate 2-for-1 discount (GOKU items)
-let twoForOne = () => {
+const twoForOne = () => {
     let x = (items[0].finalPrice * items[0].count);
     return x > 1 ? x : false;
 }
 
 // Calculate bulk discount (NARU items)
-let discountNaru = () => {
+const discountNaru = () => {
     let x = items[1].count;
     return x >= 3 ? x : false;
 }
 
 // Get total cost
-let calcTotalCost = () => {
+const calcTotalCost = () => {
     return items.reduce((accum, item) => accum + (item.price * item.count), 0);
 }
 
 // Get total final cost (includes discounts) 
-let calcTotalFinalCost = () => {
+const calcTotalFinalCost = () => {
     return items.reduce((accum, item) => accum + (item.finalPrice * item.count), 0);
 }
 
@@ -94,7 +94,7 @@ let calcTotalFinalCost = () => {
 // ------------
 
 // Update product table view
-let updateProductTable = (arr) => {  	
+const updateProductTable = (arr) => {  	
 
     $("#product-table #table-body").html(""); 
 
@@ -124,16 +124,16 @@ let updateProductTable = (arr) => {
 updateProductTable(items);
 
 // Update order summary view
-let updateOrderSummary = () => {
+const updateOrderSummary = () => {
 
     // Get number of items in the cart
-    let counter = items.reduce((accum, item) => accum + item.count, 0);
+    const counter = items.reduce((accum, item) => accum + item.count, 0);
 
     // Get total cost
-    let totalCost = calcTotalCost();
+    const totalCost = calcTotalCost();
 
     // Get total (final) cost
-    let totalFinalCost = calcTotalFinalCost();
+    const totalFinalCost = calcTotalFinalCost();
         
     // Check if 2-for-1 discount is active. If true, update HTML.
     if(twoForOne()) {
@@ -172,8 +172,8 @@ $(document).on("change", ".product input.input-count", function() {
         $(this).val(0);
     }
 
-    let itemId = $(this).parent().parent().data("id");
-    let itemCode = $(this).parent().parent().data("code");
+    const itemId = $(this).parent().parent().data("id");
+    const itemCode = $(this).parent().parent().data("code");
     let itemCount = parseInt($(this).val());
 
     // If item code is GOKU then set increments to 2 
@@ -199,12 +199,12 @@ $(document).on("change", ".product input.input-count", function() {
 // Add item to shopping cart ➕
 $(document).on("click", ".product .increase-quantity", function() {
 
-    let itemId = $(this).parent().parent().data("id");
-    let itemCode = $(this).parent().parent().data("code");
+    const itemId = $(this).parent().parent().data("id");
+    const itemCode = $(this).parent().parent().data("code");
         
     // Update count
     items[itemId].count++;
-    let itemCount = items[itemId].count;
+    const itemCount = items[itemId].count;
 
     // Apply 2-for-1 promo if conditions are met
     checkTwoForOnePromo(itemId, itemCode, itemCount, "+");
@@ -223,9 +223,9 @@ $(document).on("click", ".product .increase-quantity", function() {
 // Remove item from shopping cart ➖
 $(document).on("click", ".product .decrease-quantity", function() {
 
-    let itemId = $(this).parent().parent().data("id");
-    let itemCode = $(this).parent().parent().data("code");
-    let itemCount = items[itemId].count;
+    const itemId = $(this).parent().parent().data("id");
+    const itemCode = $(this).parent().parent().data("code");
+    const itemCount = items[itemId].count;
 
     // Ensure item count is NOT set to zero before performing any subtractions
     if(itemCount !== 0) {
@@ -258,7 +258,7 @@ $(document).on("click", ".product .decrease-quantity", function() {
 // Only allow numerical entries on number inputs
 function onlyNumberKey(evt) {
 
-    let ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    const ASCIICode = (evt.which) ? evt.which : evt.keyCode
     if (ASCIICode > 32 && (ASCIICode < 48 || ASCIICode > 57))
         return false;
     return true;
